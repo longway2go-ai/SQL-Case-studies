@@ -1,3 +1,4 @@
+#load the table
 use googleplaystore;
 SELECT * FROM googleplaystore.`googleplaystore(impure)`;
 ## data is impure due to which all rows are not loaded
@@ -5,7 +6,7 @@ SELECT * FROM googleplaystore.`googleplaystore(impure)`;
 ## data is cleaned in python notebook still due to few issues can't load entire data
 
 SELECT * FROM googleplaystore;
-#load all the rows even if can't load due to data impurity (though many are fixed that were vital)
+## load all the rows even if can't load due to data impurity (though many are fixed that were vital)
 truncate table googleplaystore;
 #this is specific to .csv files
 load data infile "D:/googleplaystore.csv"
@@ -69,8 +70,8 @@ select *, if (rateforpaid>rateforfree,'Develop paid apps', 'develop free apps') 
 -- ----------------------------------------------------------------------------------------------------------------------------------------------
 
 -- 5. Suppose you're a database administrator your databases have been hacked and hackers are changing price of certain apps on the database
--- it is taking long for IT team to neutralize the hack, however you as a responsible manager don’t want your data to be changed, 
--- do some measure where the changes in price can be recorded as you can’t stop hackers from making changes.
+-- it is taking long for IT team to neutralize the hack, however you as a responsible manager don’t want your data to be changed, do some
+-- measure where the changes in price can be recorded as you can’t stop hackers from making changes.
 
 create table pricechangeupdate(
 app varchar(255),
@@ -108,8 +109,8 @@ select * from pricechangeupdate;
 
 -- -----------------------------------------------------------------------------------------------------------------------------------------------
 
--- 6. Your IT team have neutralized the threat; however, hackers have made some changes in the prices, 
--- but because of your measure you have noted the changes, now you want correct data to be inserted into the database again.
+-- 6. Your IT team have neutralized the threat; however, hackers have made some changes in the prices, but because of your measure you have
+-- noted the changes, now you want correct data to be inserted into the database again.
 
 
 drop trigger price_update;
@@ -138,8 +139,8 @@ with t as
 select  @numerator := round(sum(rat*rev),2) , @deno_1 := round(sum(sqrt_x),2) , @deno_2:= round(sum(sqrt_y),2) from t ; 
 select round((@numerator)/(sqrt(@deno_1*@deno_2)),2) as corr_coeff;
 
--- 8. Your boss noticed  that some rows in genres columns have multiple genres in them, which was creating issue when developing the  recommender system
--- from the data he/she assigned you the task to clean the genres column and make two genres out of it, rows that have only one genre will have other column as blank.
+-- 8. Your boss noticed  that some rows in genres columns have multiple genres in them, which was creating issue when developing the  recommender system  from
+-- the data he/she assigned you the task to clean the genres column and make two genres out of it, rows that have only one genre will have other column as blank.
 
 select * from googleplaystore;
 
@@ -179,8 +180,7 @@ select app, genres, f_name(genres) as 'gene 1', l_name(genres) as 'gene 2' from 
 
 -- 9. Your senior manager wants to know which apps are  not performing as par in their particular category, however he is not interested in handling too many files or
 -- list for every  category and he/she assigned  you with a task of creating a dynamic tool where he/she  can input a category of apps he/she  interested in and 
--- your tool then provides real-time feedback by
--- displaying apps within that category that have ratings lower than the average rating for that specific category.
+-- your tool then provides real-time feedback by displaying apps within that category that have ratings lower than the average rating for that specific category.
 
 DELIMITER //
 create PROCEDURE checking(in  cate varchar(30))
